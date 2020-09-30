@@ -6,14 +6,14 @@ body {
     background-color: #EBEBEB;
     margin-top: 30px;
     margin-left: 265px;
-    margin-right: 265px;
+    width: 893px;
     border-radius: 5px;
 }
 
 hr {
     border: 1px solid white;
     margin-left: 265px;
-    margin-right: 265px;
+    width: 893px;
     margin-top: 20px;
 }
 
@@ -21,13 +21,13 @@ hr {
     font-size: 45px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
-    text-align: center;
+    margin-left: 300px;
     padding-top: 50px;
     padding-bottom: 20px;
+    width: 300px;
 }
 
 #ticker_area {
-    text-align: center;
     width: 1200px;
     display: inline-block;
     padding-top: 10px;
@@ -48,7 +48,6 @@ hr {
 }
 
 #button_area {
-    text-align: center;
     width: 1200px;
     display: inline-block;
     padding-top: 30px;
@@ -89,7 +88,7 @@ input {
 
 #tab_area {
     margin-left: 265px;
-    margin-right: 265px;
+    width: 893px;
     margin-top: 20px;
     display: none;
 }
@@ -118,7 +117,7 @@ input {
 
 #data_area {
     margin-left: 265px;
-    margin-right: 265px;
+    width: 893px;
     margin-top: 20px;
     display: none;
 }
