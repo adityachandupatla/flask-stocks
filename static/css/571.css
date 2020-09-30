@@ -1,0 +1,232 @@
+body {
+    background-color: #6969AF;
+}
+
+#banner {
+    background-color: #EBEBEB;
+    margin-top: 30px;
+    margin-left: 265px;
+    margin-right: 265px;
+    border-radius: 5px;
+}
+
+hr {
+    border: 1px solid white;
+    margin-left: 265px;
+    margin-right: 265px;
+    margin-top: 20px;
+}
+
+#main_title {
+    font-size: 45px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+#ticker_area {
+    text-align: center;
+    width: 1200px;
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#ticker_text {
+    float: left;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 250px;
+    margin-top: 3px;
+}
+
+#ticker_box {
+    float: right;
+    margin-right: 555px;
+}
+
+#button_area {
+    text-align: center;
+    width: 1200px;
+    display: inline-block;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+#search_button {
+    float: left;
+    margin-left: 310px;
+}
+
+#clear_button {
+    float: right;
+    margin-right: 610px;
+}
+
+button {
+    background-color: #FFFFFF;
+    border: 0;
+    border-radius: 5px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 35px;
+    padding-right: 35px;
+    outline-color: #000000;
+}
+
+button:hover {
+  background-color: #C7C7C7;
+}
+
+input {
+    border: 0;
+    border-radius: 2px;
+    height: 23px;
+    outline-color: #000000;
+}
+
+#tab_area {
+    margin-left: 265px;
+    margin-right: 265px;
+    margin-top: 20px;
+    display: none;
+}
+
+#tab_list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    display: none;
+}
+
+.tab {
+    float: left;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tab .tab_link {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+#data_area {
+    margin-left: 265px;
+    margin-right: 265px;
+    margin-top: 20px;
+    display: none;
+}
+
+table, th, td {
+    border: 1px solid #d8d4d4;
+    border-collapse: collapse;
+}
+
+#outlook_table {
+    display: none;
+    background-color: #F3F3F3;
+}
+
+#summary_table {
+    display: none;
+    background-color: #F3F3F3;
+}
+
+#chart_area {
+    display: none;
+    background-color: #F3F3F3;
+    height: 450px;
+    width: 893px;
+}
+
+#news_list_area {
+    display: none;
+}
+
+#error_msg_area {
+    margin-left: 220px;
+    margin-right: 200px;
+    margin-top: 40px;
+    display: none;
+}
+
+#error_msg {
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.table_td_one {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    background-color: #DEDEDE;
+    width: 300px;
+}
+
+.table_td_two {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F3F3F3;
+    text-align: center;
+    width: 600px;
+}
+
+#outlook_desc {
+    height: 100px;
+}
+
+#positive_change_percentage {
+    display: none;
+}
+
+#negative_change_percentage {
+    display: none;
+}
+
+.arrow_image {
+    height: 15px;
+    width: 15px;
+    margin-left: 5px;
+}
+
+#news_section {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.news_item_image {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.news_text_area {
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+    width: 760px;
+}
+
+.news_item {
+    height: 120px;
+    background-color: #F3F3F3;
+    margin: 0 0 20px 0;
+    border-radius: 3px;
+}
+
+.news_text_content {
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+}
+
+.news_title {
+    font-weight: 600;
+}
+

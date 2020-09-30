@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stock Search</title>
+        <link rel="stylesheet" type="text/css" href="css/571.css"/>
+        
+        <!-- Script tags required by Highcharts -->
+        <script src="https://code.highcharts.com/stock/highstock.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+
+        <script type="text/javascript" src="js/utils.js"></script>
+        <script type="text/javascript" src="js/mychart.js"></script>
+        <script type="text/javascript" src="js/571.js"></script>
+    </head>
+    <body>
+
+        <div id="banner">
+            <div id="main_title">
+                <span>Stock Search</span>
+            </div>
+            <form onsubmit="return showData()" id="ticker_form" method="get">
+                <div id="ticker_area">
+                    <div id="ticker_text">
+                        <span>Enter Stock Ticker Symbol *</span>
+                    </div>
+                    <div id="ticker_box">
+                        <input type="text" name="ticker" id="ticker" required/>
+                    </div>
+                </div>
+            </form>
+            <div id="button_area">
+                <div id="search_button">
+                    <button type="submit" form="ticker_form" value="Submit">Search</button>
+                </div>
+                <div id="clear_button">
+                    <button onclick="return clearTickerBox()">Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div id="tab_area">
+            <ul id="tab_list">
+                <li class="tab" id="companyOutlookElem">
+                    <a href="javascript:companyOutlook(false)" class="tab_link" id="companyOutlookLink">Company Outlook</a>
+                </li>
+                <li class="tab" id="stockSummaryElem">
+                    <a href="javascript:stockSummary()" class="tab_link" id="stockSummaryLink">Stock Summary</a>
+                </li>
+                <li class="tab" id="chartsElem">
+                    <a href="javascript:charts()" class="tab_link" id="chartsLink">Charts</a>
+                </li>
+                <li class="tab" id="latestNewsElem">
+                    <a href="javascript:latestNews()" class="tab_link" id="latestNewsLink">Latest News</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="data_area">
+            <table id="outlook_table">
+                <tbody>
+                    <tr>
+                        <td class="table_td_one">Company Name</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">Stock Ticker Symbol</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">Stock Exchange Code</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">Company Start Date</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr id="outlook_desc">
+                        <td class="table_td_one">Description</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="summary_table">
+                <tbody>
+                    <tr>
+                        <td class="table_td_one">Stock Ticker Symbol</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">Trading Day</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">Previous Closing Price</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">Opening Price</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">High Price</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">Low Price</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">Last Price</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                    <tr id="change_row">
+                        <td class="table_td_one">Change</td>
+                        <td class="table_td_two">
+                            <span id="change_text"></span>
+                            <span id="change_image_span">
+                                <img src="https://csci571.com/hw/hw6/images/GreenArrowUp.jpg" id="positive_change" class="arrow_image"/>
+                                <img src="https://csci571.com/hw/hw6/images/RedArrowDown.jpg" id="negative_change" class="arrow_image"/>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr id="change_percentage_row">
+                        <td class="table_td_one">Change Percent</td>
+                        <td class="table_td_two">
+                            <span id="change_percentage_text"></span>
+                            <span id="change_percentage_image_span">
+                                <img src="https://csci571.com/hw/hw6/images/GreenArrowUp.jpg" id="positive_change_percentage" class="arrow_image"/>
+                                <img src="https://csci571.com/hw/hw6/images/RedArrowDown.jpg" id="negative_change_percentage" class="arrow_image"/>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_one">Number of Shares Traded</td>
+                        <td class="table_td_two"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="chart_area"></div>
+            <div id="news_list_area">
+                <ul id="news_section">
+                    <li class="news_item">
+                        <img src="#" class="news_item_image"/>
+                        <div class="news_text_area">
+                            <span class="news_text_content news_title">News Title</span>
+                            <span class="news_text_content"></span>
+                            <span><a href="#" target='_blank' rel='noopener noreferrer' class="news_text_content">See Original Post</a></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="error_msg_area"><span id="error_msg"></span></div>
+        </div>
+
+    </body>
+</html>
