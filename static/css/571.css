@@ -175,6 +175,14 @@ table, th, td {
     width: 600px;
 }
 
+#special_desc_text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical; 
+    border: 0;
+}
+
 #outlook_desc {
     height: 100px;
 }
