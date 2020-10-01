@@ -26,7 +26,11 @@ def company_outlook(ticker):
     query_params = {"token": api_tiingo_token}
     response = requests.get(meta_endpoint_api, params=query_params)
     if response.status_code == requests.codes.ok:
-        return parser.parse_company_outlook(response.json())
+        parsed_response = parser.parse_company_outlook(response.json())
+        if parsed_response["parsing"] == False:
+            return utils.parse_outlook_error()
+        else:
+            return parsed_response
     else:
         return abort(404)
 
@@ -38,7 +42,11 @@ def stock_summary(ticker):
     query_params = {"token": api_tiingo_token}
     response = requests.get(top_of_book_api, params=query_params)
     if response.status_code == requests.codes.ok:
-        return parser.parse_stock_summary(response.json()[0])
+        parsed_response = parser.parse_stock_summary(response.json()[0])
+        if parsed_response["parsing"] == False:
+            return utils.parse_stock_summary_error()
+        else:
+            return parsed_response
     else:
         return abort(404)
 
@@ -57,7 +65,11 @@ def chart(ticker):
     }
     response = requests.get(historical_endpoint_api, params=query_params)
     if response.status_code == requests.codes.ok:
-        return parser.parse_chart(response.json())
+        parsed_response = parser.parse_chart(response.json())
+        if parsed_response["parsing"] == False:
+            return utils.parse_chart_values_error()
+        else:
+            return parsed_response
     else:
         return abort(404)
 
@@ -82,6 +94,9 @@ def news(ticker):
 
         if response.status_code == requests.codes.ok:
             piece_response = parser.parse_news(response.json())
+            if piece_response["parsing"] == False:
+                return utils.parse_news_error()
+                
             for article in piece_response["articles"]:
                 news_articles["articles"].append(article)
                 if len(news_articles["articles"]) == 5:
