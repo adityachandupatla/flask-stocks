@@ -87,7 +87,7 @@ function companyOutlook(initial) {
 				display_error(data_area, JSON.parse(xhr.response).message);
 			}
 			else {
-				alert("Unexpected status  code: " + xhr.status + " see console for more info");
+				alert("Unexpected status code: " + xhr.status + " see console for more info");
 				console.log(xhr.response);
 			}
 		};
@@ -155,7 +155,7 @@ function stockSummary() {
 				display_error(data_area, JSON.parse(xhr.response).message);
 			}
 			else {
-				alert("Unexpected status  code: " + xhr.status + " see console for more info");
+				alert("Unexpected status code: " + xhr.status + " see console for more info");
 				console.log(xhr.response);
 			}
 		};
@@ -208,7 +208,7 @@ function charts() {
 				display_error(data_area, JSON.parse(xhr.response).message);
 			}
 			else {
-				alert("Unexpected status  code: " + xhr.status + " see console for more info");
+				alert("Unexpected status code: " + xhr.status + " see console for more info");
 				console.log(xhr.response);
 			}
 		};
@@ -275,7 +275,7 @@ function latestNews() {
 				display_error(data_area, JSON.parse(xhr.response).message);
 			}
 			else {
-				alert("Unexpected status  code: " + xhr.status + " see console for more info");
+				alert("Unexpected status code: " + xhr.status + " see console for more info");
 				console.log(xhr.response);
 			}
 		};
