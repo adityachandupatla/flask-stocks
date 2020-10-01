@@ -3,7 +3,7 @@ import datetime
 
 import utils
 
-parse_error_msg = "Unable to parse"
+parse_error_msg = "[Unable to parse]"
 
 def parse_company_outlook(server_response):
     required_response = {}
