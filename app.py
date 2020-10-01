@@ -30,7 +30,7 @@ def company_outlook(ticker):
         if parsed_response["parsing"] == False:
             return utils.parse_outlook_error()
         else:
-            return parsed_response
+            return utils.append_endpoints(parsed_response, ticker)
     else:
         return abort(404)
 
@@ -46,7 +46,7 @@ def stock_summary(ticker):
         if parsed_response["parsing"] == False:
             return utils.parse_stock_summary_error()
         else:
-            return parsed_response
+            return utils.append_endpoints(parsed_response, ticker)
     else:
         return abort(404)
 
@@ -69,7 +69,7 @@ def chart(ticker):
         if parsed_response["parsing"] == False:
             return utils.parse_chart_values_error()
         else:
-            return parsed_response
+            return utils.append_endpoints(parsed_response, ticker)
     else:
         return abort(404)
 
@@ -100,10 +100,10 @@ def news(ticker):
             for article in piece_response["articles"]:
                 news_articles["articles"].append(article)
                 if len(news_articles["articles"]) == 5:
-                    return news_articles # all articles found!
+                    return utils.append_endpoints(news_articles, ticker) # all articles found!
             page = page + 1
         else:
             if len(news_articles["articles"]) == 0:
                 return utils.return_news_error() # no articles found
             else:
-                return news_articles # some (< 5) articles found
+                return utils.append_endpoints(news_articles, ticker) # some (< 5) articles found

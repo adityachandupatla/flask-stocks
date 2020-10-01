@@ -14,6 +14,14 @@ def is_valid_article(dict_obj):
             return False
     return True
 
+def append_endpoints(success_response, current_ticker):
+    success_response["endpoints"] = {}
+    success_response["endpoints"]["outlook"] = "/stock/api/v1.0/outlook/" + current_ticker
+    success_response["endpoints"]["summary"] = "/stock/api/v1.0/summary/" + current_ticker
+    success_response["endpoints"]["charts"] = "/stock/api/v1.0/chart/" + current_ticker
+    success_response["endpoints"]["news"] = "/stock/api/v1.0/news/" + current_ticker
+    return success_response
+
 def is_valid_ticker(ticker):
     return (ticker != None) and (ticker != "") and ticker.isalnum()
 
