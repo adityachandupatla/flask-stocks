@@ -74,6 +74,7 @@ function createChart(chartdata, tickerbox) {
                 formatter: function () {
                     const month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                     var utc_date = new Date(this.value);
+                    utc_date.setDate(utc_date.getDate() + 1);
                     return utc_date.getDate() + "." + month_names_short[utc_date.getMonth()];
                 }
             },
