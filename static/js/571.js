@@ -63,6 +63,7 @@ function companyOutlook(initial) {
 		var tab_list = document.getElementById("tab_list");
 
 		if (non_alpha_numeric(tickerbox)) {
+			hide_all();
 			display_error(data_area, tickerbox_error_msg);
 			return false;
 		}
@@ -123,6 +124,7 @@ function stockSummary() {
 		var tab_list = document.getElementById("tab_list");
 
 		if (non_alpha_numeric(tickerbox)) {
+			hide_all();
 			display_error(data_area, tickerbox_error_msg);
 			return false;
 		}
@@ -196,6 +198,7 @@ function charts() {
 		var tab_list = document.getElementById("tab_list");
 
 		if (non_alpha_numeric(tickerbox)) {
+			hide_all();
 			display_error(data_area, tickerbox_error_msg);
 			return false;
 		}
@@ -254,6 +257,7 @@ function latestNews() {
 		var tab_list = document.getElementById("tab_list");
 
 		if (non_alpha_numeric(tickerbox)) {
+			hide_all();
 			display_error(data_area, tickerbox_error_msg);
 			return false;
 		}
