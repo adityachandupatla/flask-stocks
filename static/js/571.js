@@ -64,29 +64,24 @@ function companyOutlook(initial) {
 
 		xhr.onload = function() {
 			hide_all();
-			if (xhr.status == 200) {
+			if (xhr.status == 200 || xhr.status == 500) {
 				tab_area.style.display = "block";
 				tab_list.style.display = "block";
 				highlight_tab(tab_list, "companyOutlookElem");
 				
-				data_area.style.display = "block";
-				var outlook_table = document.getElementById("outlook_table");
-				outlook_table.style.display = "block";
-				
-				var jsonResponse = JSON.parse(xhr.response);
-				for (var i = 0 ; i < outlook_table.rows.length - 1; i++) {
-					outlook_table.rows[i].cells[1].innerHTML = jsonResponse[outlook_table.rows[i].cells[0].innerHTML];
+				if (xhr.status == 500) {
+					display_error(data_area, JSON.parse(xhr.response).message);
 				}
-
-				var c = outlook_table.rows.length - 1;
-				var desc = jsonResponse[outlook_table.rows[c].cells[0].innerHTML];
-				if (desc.length > 380) {
-					desc = desc.substring(0, 380); // truncate it
-					desc += "...";
+				else {
+					data_area.style.display = "block";
+					var outlook_table = document.getElementById("outlook_table");
+					outlook_table.style.display = "block";
+					
+					var jsonResponse = JSON.parse(xhr.response);
+					for (var i = 0 ; i < outlook_table.rows.length; i++) {
+						outlook_table.rows[i].cells[1].innerHTML = jsonResponse[outlook_table.rows[i].cells[0].innerHTML];
+					}
 				}
-				outlook_table.rows[c].cells[1].innerHTML = desc;
-				
-				// Need to truncate the description to 5 lines (truncated but still need to verify)
 			}
 			else if (xhr.status == 404) {
 				display_error(data_area, JSON.parse(xhr.response).message);
@@ -124,30 +119,35 @@ function stockSummary() {
 
 		xhr.onload = function() {
 			hide_all();
-			if (xhr.status == 200) {
+			if (xhr.status == 200 || xhr.status == 500) {
 				tab_area.style.display = "block";
 				tab_list.style.display = "block";
 				highlight_tab(tab_list, "stockSummaryElem");
 				
-				data_area.style.display = "block";
-				var summary_table = document.getElementById("summary_table");
-				summary_table.style.display = "block";
-				
-				var jsonResponse = JSON.parse(xhr.response);
-				for (var i = 0 ; i < summary_table.rows.length; i++) {
-					if (summary_table.rows[i].id == "change_percentage_row") {
-						change_percentage_val = jsonResponse[summary_table.rows[i].cells[0].innerHTML];
-						document.getElementById("change_percentage_text").innerHTML = change_percentage_val.toString() + "%";
-						update_text_and_image(change_percentage_val, "positive_change_percentage", "negative_change_percentage");
+				if (xhr.status == 500) {
+					display_error(data_area, JSON.parse(xhr.response).message);
+				}
+				else {
+					data_area.style.display = "block";
+					var summary_table = document.getElementById("summary_table");
+					summary_table.style.display = "block";
+					
+					var jsonResponse = JSON.parse(xhr.response);
+					for (var i = 0 ; i < summary_table.rows.length; i++) {
+						if (summary_table.rows[i].id == "change_percentage_row") {
+							change_percentage_val = jsonResponse[summary_table.rows[i].cells[0].innerHTML];
+							document.getElementById("change_percentage_text").innerHTML = change_percentage_val.toString() + "%";
+							update_text_and_image(change_percentage_val, "positive_change_percentage", "negative_change_percentage");
 
-					}
-					else if (summary_table.rows[i].id == "change_row") {
-						change_val = jsonResponse[summary_table.rows[i].cells[0].innerHTML];
-						document.getElementById("change_text").innerHTML = change_val;
-						update_text_and_image(change_val, "positive_change", "negative_change");
-					}
-					else {
-						summary_table.rows[i].cells[1].innerHTML = jsonResponse[summary_table.rows[i].cells[0].innerHTML];
+						}
+						else if (summary_table.rows[i].id == "change_row") {
+							change_val = jsonResponse[summary_table.rows[i].cells[0].innerHTML];
+							document.getElementById("change_text").innerHTML = change_val;
+							update_text_and_image(change_val, "positive_change", "negative_change");
+						}
+						else {
+							summary_table.rows[i].cells[1].innerHTML = jsonResponse[summary_table.rows[i].cells[0].innerHTML];
+						}
 					}
 				}
 			}
@@ -187,17 +187,22 @@ function charts() {
 
 		xhr.onload = function() {
 			hide_all();
-			if (xhr.status == 200) {
+			if (xhr.status == 200 || xhr.status == 500) {
 				tab_area.style.display = "block";
 				tab_list.style.display = "block";
 				highlight_tab(tab_list, "chartsElem");
 				
-				data_area.style.display = "block";
-				var chart_area = document.getElementById("chart_area");
-				chart_area.style.display = "block";
-				
-				var jsonResponse = JSON.parse(xhr.response);
-				createChart(jsonResponse.chartdata, tickerbox);
+				if (xhr.status == 500) {
+					display_error(data_area, JSON.parse(xhr.response).message);
+				}
+				else {
+					data_area.style.display = "block";
+					var chart_area = document.getElementById("chart_area");
+					chart_area.style.display = "block";
+					
+					var jsonResponse = JSON.parse(xhr.response);
+					createChart(jsonResponse.chartdata, tickerbox);
+				}
 			}
 			else if (xhr.status == 404) {
 				display_error(data_area, JSON.parse(xhr.response).message);
