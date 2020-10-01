@@ -20,3 +20,19 @@ def is_valid_ticker(ticker):
 def return_news_error():
     # Treating this case as: Internal server error
     return make_response(jsonify({"message": "No news articles have been found"}), 500)
+
+def parse_outlook_error():
+    # Treating this case as: Internal server error
+    return make_response(jsonify({"message": "Unable to parse the company outlook response from Tiingo"}), 500)
+
+def parse_stock_summary_error():
+    # Treating this case as: Internal server error
+    return make_response(jsonify({"message": "Unable to parse the stock summary response from Tiingo"}), 500)
+
+def parse_chart_values_error():
+    # Treating this case as: Internal server error
+    return make_response(jsonify({"message": "Unable to parse the chart values response from Tiingo"}), 500)
+
+def parse_news_error():
+    # Treating this case as: Internal server error
+    return make_response(jsonify({"message": "Unable to parse the news response from News API"}), 500)
