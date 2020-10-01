@@ -5,6 +5,7 @@ function createChart(chartdata, tickerbox) {
     max_y1 = 0;
     min_y2 = Number.MAX_SAFE_INTEGER;
     max_y2 = 0;
+    todays_date = new Date().toLocaleString('en-GB').substr(0,10).replaceAll("/", "-").split("-").reverse().join("-");
     for (var i = 0;i < chartdata.length;++i) {
         x = new Date(chartdata[i]["Date"]).getTime();
         y1 = chartdata[i]["Stock Price"];
@@ -24,8 +25,7 @@ function createChart(chartdata, tickerbox) {
     Highcharts.stockChart('chart_area', {
 
         title: {
-            // need to verify whether we are getting today's date also from backend (previously we were getting yesterday's)
-            text: "Stock Price " + tickerbox.toUpperCase() + " " + new Date().toISOString().substr(0, 10)
+            text: "Stock Price " + tickerbox.toUpperCase() + " " + todays_date
         },
 
         subtitle: {
@@ -109,13 +109,11 @@ function createChart(chartdata, tickerbox) {
                         this.update({
                             tickPositioner: function() {
                                 var positions = [];
-                                // var info = this.tickPositions.info;
                                 for (var x = e.max; x >= e.min; x -= ticksSpacing) {
                                     if (date_hashtable.includes(x)) {
                                         positions.push(x);
                                     }
                                 }
-                                // positions.info = info;
                                 return positions.reverse();
                             }
                         }, false);
@@ -176,9 +174,6 @@ function createChart(chartdata, tickerbox) {
                 name: tickerbox.toUpperCase() + " Volume",
                 type: 'column',
                 data: bar_chart_data,
-                // tooltip: {
-                //     valueDecimals: 2
-                // },
                 yAxis: 1
             }
         ]

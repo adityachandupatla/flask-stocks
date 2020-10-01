@@ -30,7 +30,6 @@ function register_handlers() {
 }
 
 function showData() {
-	// need to validate tickerbox.value (because we are directly adding it to url)
 	new_tickerbox = document.getElementById("ticker").value;
 	if (tickerbox == new_tickerbox) {
 		if (current_tab == "companyOutlookElem") {

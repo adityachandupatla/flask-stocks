@@ -7,7 +7,6 @@ def read_secret(filename):
     return contents
 
 def is_valid_article(dict_obj):
-    # Need to verify whether this validation is correct or not
     keys = ["title", "url", "urlToImage", "publishedAt"]
     for key in keys:
         if key not in dict_obj or dict_obj[key] == None or dict_obj[key] == "":

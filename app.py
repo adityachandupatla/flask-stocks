@@ -59,8 +59,8 @@ def chart(ticker):
     six_month_prior_date = str(datetime.date.today() - relativedelta(months=6))
     query_params = {
         "startDate": six_month_prior_date,
-        "resampleFreq": "12hour", # Need to check whether this is fixed
-        "columns": "open,high,low,close,volume", # why do you need other columns if you are not passing to UI?
+        "resampleFreq": "12hour",
+        "columns": "open,high,low,close,volume",
         "token": api_tiingo_token
     }
     response = requests.get(historical_endpoint_api, params=query_params)
