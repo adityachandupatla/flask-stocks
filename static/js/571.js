@@ -1,5 +1,6 @@
 var tickerbox = ""; // global variable representing current value of ticker box
 var current_tab = "";
+var tickerbox_error_msg = "Please enter an alphanumeric character as a ticker symbol";
 
 function clearTickerBox() {
 	document.getElementById("ticker").value = "";
@@ -62,6 +63,11 @@ function companyOutlook(initial) {
 		var tab_area = document.getElementById("tab_area");
 		var tab_list = document.getElementById("tab_list");
 
+		if (non_alpha_numeric(tickerbox)) {
+			display_error(data_area, tickerbox_error_msg);
+			return false;
+		}
+
 		xhr.onload = function() {
 			hide_all();
 			if (xhr.status == 200 || xhr.status == 500) {
@@ -116,6 +122,11 @@ function stockSummary() {
 		var data_area = document.getElementById("data_area");
 		var tab_area = document.getElementById("tab_area");
 		var tab_list = document.getElementById("tab_list");
+
+		if (non_alpha_numeric(tickerbox)) {
+			display_error(data_area, tickerbox_error_msg);
+			return false;
+		}
 
 		xhr.onload = function() {
 			hide_all();
@@ -185,6 +196,11 @@ function charts() {
 		var tab_area = document.getElementById("tab_area");
 		var tab_list = document.getElementById("tab_list");
 
+		if (non_alpha_numeric(tickerbox)) {
+			display_error(data_area, tickerbox_error_msg);
+			return false;
+		}
+
 		xhr.onload = function() {
 			hide_all();
 			if (xhr.status == 200 || xhr.status == 500) {
@@ -237,6 +253,11 @@ function latestNews() {
 		var data_area = document.getElementById("data_area");
 		var tab_area = document.getElementById("tab_area");
 		var tab_list = document.getElementById("tab_list");
+
+		if (non_alpha_numeric(tickerbox)) {
+			display_error(data_area, tickerbox_error_msg);
+			return false;
+		}
 
 		xhr.onload = function() {
 			hide_all();

@@ -10,6 +10,19 @@ function hide_all() {
 	document.getElementById("error_msg").style.display = "none";
 }
 
+function non_alpha_numeric(mystr) {
+	for (var i = 0;i < mystr.length;++i) {
+		var ch = mystr.charCodeAt(i);
+		if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122) || (ch >= 48 && ch <= 57)) {
+			continue;
+		}
+		else {
+			return true;
+		}
+	}
+	return false;
+}
+
 function highlight_tab(tab_list, tab_elem_id) {
 	var li_elems = tab_list.children;
 	for (var i = 0;i < li_elems.length;++i) {
