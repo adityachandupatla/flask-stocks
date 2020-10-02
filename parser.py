@@ -56,7 +56,10 @@ def parse_stock_summary(server_response):
         required_response["Stock Ticker Symbol"] = parse_error_msg
 
     if "timestamp" in server_response:
-        required_response["Trading Day"] = datetime.datetime.strptime(server_response["timestamp"], "%Y-%m-%dT%H:%M:%S+00:00").date().strftime("%Y-%m-%d")
+        try:
+            required_response["Trading Day"] = datetime.datetime.strptime(server_response["timestamp"], "%Y-%m-%dT%H:%M:%S+00:00").date().strftime("%Y-%m-%d")
+        except:
+            required_response["Trading Day"] = parse_error_msg
     else:
         required_response["Trading Day"] = parse_error_msg
 
@@ -87,10 +90,14 @@ def parse_stock_summary(server_response):
 
     
     if "last" in server_response and "prevClose" in server_response:
-        change = float(server_response["last"]) - float(server_response["prevClose"])
-        required_response["Change"] = round(change, 2)
-        percent_change = (change / float(server_response["prevClose"])) * 100
-        required_response["Change Percent"] = round(percent_change, 2)
+        try:
+            change = float(server_response["last"]) - float(server_response["prevClose"])
+            required_response["Change"] = round(change, 2)
+            percent_change = (change / float(server_response["prevClose"])) * 100
+            required_response["Change Percent"] = round(percent_change, 2)
+        except:
+            required_response["Change"] = parse_error_msg
+            required_response["Change Percent"] = parse_error_msg
     else:
         required_response["Change"] = parse_error_msg
         required_response["Change Percent"] = parse_error_msg
@@ -105,7 +112,7 @@ def parse_stock_summary(server_response):
 def parse_chart(server_response_list):
     required_response = {}
 
-    if not isinstance(server_response_list, list):
+    if not isinstance(server_response_list, list) or len(server_response_list) == 0:
         required_response["parsing"] = False
         return required_response
 
@@ -116,22 +123,30 @@ def parse_chart(server_response_list):
         chart_info = {}
 
         if "date" in intraday_response:
-            chart_info["Date"] = datetime.datetime.strptime(intraday_response["date"], "%Y-%m-%dT%H:%M:%S.000Z").date().strftime("%Y-%m-%d")
+            try:
+                chart_info["Date"] = datetime.datetime.strptime(intraday_response["date"], "%Y-%m-%dT%H:%M:%S.000Z").date().strftime("%Y-%m-%d")
+            except:
+                chart_info["Date"] = parse_error_msg
+                required_response["parsing"] = False
         else:
             chart_info["Date"] = parse_error_msg
+            required_response["parsing"] = False
 
         if "close" in intraday_response:
             chart_info["Stock Price"] = intraday_response["close"]
         else:
             chart_info["Stock Price"] = parse_error_msg
+            required_response["parsing"] = False
 
         if "volume" in intraday_response:
             chart_info["Volume"] = intraday_response["volume"]
         else:
             chart_info["Volume"] = parse_error_msg
+            required_response["parsing"] = False
 
         required_response["chartdata"].append(chart_info)
 
+    # if even one field parsing fails, then there's no point building the chart
     return required_response
 
 def parse_news(server_response):
@@ -147,24 +162,12 @@ def parse_news(server_response):
     for article_response in server_response["articles"]:
         if utils.is_valid_article(article_response):
             article = {}
-            if "title" in article_response:
-                article["Title"] = article_response["title"]
-            else:
-                article["Title"] = parse_error_msg
-
-            if "url" in article_response:
-                article["Link to Original Post"] = article_response["url"]
-            else:
-                article["Link to Original Post"] = parse_error_msg
-
-            if "urlToImage" in article_response:
-                article["Image"] = article_response["urlToImage"]
-            else:
-                article["Image"] = parse_error_msg
-
-            if "publishedAt" in article_response:
+            article["Title"] = article_response["title"]
+            article["Link to Original Post"] = article_response["url"]
+            article["Image"] = article_response["urlToImage"]
+            try:
                 article["Date"] = datetime.datetime.strptime(article_response["publishedAt"], "%Y-%m-%dT%H:%M:%SZ").date().strftime("%m/%d/%Y")
-            else:
+            except:
                 article["Date"] = parse_error_msg
 
             required_response["articles"].append(article)
