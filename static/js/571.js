@@ -70,12 +70,12 @@ function companyOutlook(initial) {
 
 		xhr.onload = function() {
 			hide_all();
-			if (xhr.status == 200 || xhr.status == 500) {
+			if (xhr.status == 200 || xhr.status == 202) {
 				tab_area.style.display = "block";
 				tab_list.style.display = "block";
 				highlight_tab(tab_list, "companyOutlookElem");
 				
-				if (xhr.status == 500) {
+				if (xhr.status == 202) {
 					display_error(data_area, JSON.parse(xhr.response).message);
 				}
 				else {
@@ -131,12 +131,12 @@ function stockSummary() {
 
 		xhr.onload = function() {
 			hide_all();
-			if (xhr.status == 200 || xhr.status == 500) {
+			if (xhr.status == 200 || xhr.status == 202) {
 				tab_area.style.display = "block";
 				tab_list.style.display = "block";
 				highlight_tab(tab_list, "stockSummaryElem");
 				
-				if (xhr.status == 500) {
+				if (xhr.status == 202) {
 					display_error(data_area, JSON.parse(xhr.response).message);
 				}
 				else {
@@ -205,12 +205,12 @@ function charts() {
 
 		xhr.onload = function() {
 			hide_all();
-			if (xhr.status == 200 || xhr.status == 500) {
+			if (xhr.status == 200 || xhr.status == 202) {
 				tab_area.style.display = "block";
 				tab_list.style.display = "block";
 				highlight_tab(tab_list, "chartsElem");
 				
-				if (xhr.status == 500) {
+				if (xhr.status == 202) {
 					display_error(data_area, JSON.parse(xhr.response).message);
 				}
 				else {
@@ -264,12 +264,12 @@ function latestNews() {
 
 		xhr.onload = function() {
 			hide_all();
-			if (xhr.status == 200 || xhr.status == 500) {
+			if (xhr.status == 200 || xhr.status == 202) {
 				tab_area.style.display = "block";
 				tab_list.style.display = "block";
 				highlight_tab(tab_list, "latestNewsElem");
 
-				if (xhr.status == 500) {
+				if (xhr.status == 202) {
 					display_error(data_area, JSON.parse(xhr.response).message);
 				}
 				else {
