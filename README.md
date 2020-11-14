@@ -41,4 +41,8 @@ Use <a href="https://www.highcharts.com/">Highcharts</a> for displaying interact
 <p>Charts Page</p>
 <img src="charts.png"/>
 <p>News Page</p>
-<img src="news-tab.png"/>
+<img src="news-tab.png"/><br/>
+
+<h2>API response</h2>
+The Flask backend also exposes data in the form of a REST API, which can be consumed by any other application (not just the above frontend javascript)<br/>
+<img src="json.png"/>
